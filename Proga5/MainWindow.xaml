@@ -1,0 +1,22 @@
+﻿<Window x:Class="Proga5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proga5"
+        mc:Ignorable="d"
+        Title="Блокнот" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Новый" Command="ApplicationCommands.New" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="_Открыть" Command="ApplicationCommands.Open" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="_Сохранить" Command="ApplicationCommands.Save" InputGestureText="Ctrl+S"/>
+            </MenuItem>
+        </Menu>
+        <TextBox Name="TextEditor" AcceptsReturn="True" AcceptsTab="True" 
+                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                 FontFamily="Consolas" FontSize="14" />
+    </DockPanel>
+    
+</Window>
