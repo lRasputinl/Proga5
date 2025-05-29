@@ -1,22 +1,59 @@
-﻿<Window x:Class="Proga5.MainWindow"
+﻿<Window x:Class="TextEditor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Proga5"
-        mc:Ignorable="d"
-        Title="Блокнот" Height="450" Width="800">
+        Title="Блокнот" Height="600" Width="800"
+        KeyDown="Window_KeyDown">
+
     <DockPanel>
+        <!-- Меню -->
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Файл">
-                <MenuItem Header="_Новый" Command="ApplicationCommands.New" InputGestureText="Ctrl+N"/>
-                <MenuItem Header="_Открыть" Command="ApplicationCommands.Open" InputGestureText="Ctrl+O"/>
-                <MenuItem Header="_Сохранить" Command="ApplicationCommands.Save" InputGestureText="Ctrl+S"/>
+            <MenuItem Header="Файл" FontSize="14">
+                <MenuItem Header="Новый (Ctrl+N)" Click="NewFile_Click"/>
+                <MenuItem Header="Открыть (Ctrl+O)" Click="OpenFile_Click"/>
+                <MenuItem Header="Сохранить (Ctrl+S)" Click="SaveFile_Click"/>
             </MenuItem>
         </Menu>
-        <TextBox Name="TextEditor" AcceptsReturn="True" AcceptsTab="True" 
-                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                 FontFamily="Consolas" FontSize="14" SpellCheck.IsEnabled="True" Language="ru-RU" ToolTip="Введите текст" />
+
+        <!-- Панель форматирования -->
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="5">
+            <TextBlock Text="Форматирование текста"
+                       FontStyle="Italic"
+                       FontSize="14"
+                       HorizontalAlignment="Left"
+                       Margin="0 5 0 5"/>
+
+            <WrapPanel HorizontalAlignment="Left">
+                <!-- Форматирование -->
+                <Button x:Name="BoldBtn" ToolTip="Жирный" Click="Bold_Click" Margin="2" Width="23" Height="23" Background="{x:Null}">
+                    <TextBlock Text="Ж" FontWeight="Bold" FontSize="14" Width="14" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Button x:Name="ItalicBtn" ToolTip="Курсив" Click="Italic_Click" Margin="2" Width="23" Height="23" Background="{x:Null}">
+                    <TextBlock Text="К" FontStyle="Italic" FontSize="14" Width="9" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Button>
+                <Button x:Name="UnderlineBtn" ToolTip="Подчёркнутый" Click="Underline_Click" Margin="2" Width="23" Height="23" Background="{x:Null}">
+                    <TextBlock Text="П" TextDecorations="Underline" FontSize="14" Height="19" IsEnabled="False"/>
+                </Button>
+                <Button x:Name="StrikethroughBtn" ToolTip="Зачёркнутый" Click="Strikethrough_Click" Margin="2" Width="23" Height="23" Background="{x:Null}">
+                    <TextBlock Text="З" TextDecorations="Strikethrough" FontSize="14" Height="19"/>
+                </Button>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                
+                <!-- Цвета -->
+                <Button x:Name="RedBtn" ToolTip="Красный" Click="Red_Click" Width="20" Height="20" Margin="2,2,2,2" Background="Red"/>
+                <Button x:Name="BlueBtn" ToolTip="Синий" Click="Blue_Click" Width="20" Height="20" Margin="2" Background="Blue"/>
+                <Button x:Name="GreenBtn" ToolTip="Зелёный" Click="Green_Click" Width="20" Height="20" Margin="2" Background="Green"/>
+                <Button x:Name="BlackBtn" ToolTip="Чёрный" Click="Black_Click" Width="20" Height="20" Margin="2" Background="Black"/>
+                
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+ 
+                <Button ToolTip="Очистить форматирование" Click="ClearFormatting_Click" Margin="2">
+                    <TextBlock Text="X" FontWeight="Bold" FontSize="14" Foreground="Gray"/>
+                </Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <!-- Редактор -->
+        <RichTextBox Name="editor" Margin="5" AcceptsTab="True" FontSize="20" SpellCheck.IsEnabled="True" Language="ru-ru"/>
     </DockPanel>
-    
 </Window>
